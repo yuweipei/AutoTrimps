@@ -500,6 +500,8 @@ function RequipCost(gameResource, equip) {
     var price = parseFloat(getBuildingItemPrice(gameResource, equip.Resource, equip.Equip, 1));
     if (equip.Equip)
         price = Math.ceil(price * (Math.pow(1 - game.portal.Artisanistry.modifier, game.portal.Artisanistry.radLevel)));
+        price *= autoBattle.oneTimers.Artisan.getMult();
+        if (game.global.challenges == "Pandemonium") { price *= game.challenges.Pandemonium.getEnemyMult();}
     /*else
         price = Math.ceil(price * (Math.pow(1 - game.portal.Resourceful.modifier, game.portal.Resourceful.radLevel)));*/
     return price;
@@ -849,9 +851,14 @@ function mostEfficientEquipment(fakeLevels = {}) {
     ];
 
     var artBoost = Math.pow(1 - game.portal.Artisanistry.modifier, game.portal.Artisanistry.radLevel);
+    artBoost *= autoBattle.oneTimers.Artisan.getMult();
+    if (game.global.challenges == "Pandemonium") { artBoost *= game.challenges.Pandemonium.getEnemyMult();}
 
     for (var i in RequipmentList) {
         var nextLevelCost = game.equipment[i].cost[RequipmentList[i].Resource][0] * Math.pow(game.equipment[i].cost[RequipmentList[i].Resource][1], game.equipment[i].level + fakeLevels[i]) * artBoost;
+        if (game.global.challengeActive == "Pandemonium" && game.challenges.Pandemonium.isEquipBlocked(i)) {
+            continue;
+        }
 
         var nextLevelValue = game.equipment[i][RequipmentList[i].Stat + "Calculated"];
 
@@ -913,11 +920,17 @@ function getMaxAffordable(baseCost, totalResource, costScaling, isCompounding) {
 
 function buyPrestigeMaybe(equipName) {
 
+    if (game.global.challengeActive == "Pandemonium" && game.challenges.Pandemonium.isEquipBlocked(equipName)) {
+            return false;
+    }
+
     var equipment = game.equipment[equipName];
     var resource = (equipName == "Shield") ? 'wood' : 'metal'
     var equipStat = (typeof equipment.attack !== 'undefined') ? 'attack' : 'health';
 
     var artBoost = Math.pow(1 - game.portal.Artisanistry.modifier, game.portal.Artisanistry.radLevel);
+    artBoost *= autoBattle.oneTimers.Artisan.getMult();
+    if (game.global.challenges == "Pandemonium") { artBoost *= game.challenges.Pandemonium.getEnemyMult();}
 
     var prestigeUpgradeName = "";
     var allUpgradeNames = Object.getOwnPropertyNames(game.upgrades);
@@ -965,8 +978,9 @@ function RautoEquip() {
         for (var equipName in game.equipment) {
             if (buyPrestigeMaybe(equipName)) {
               if(!game.equipment[equipName].locked) {
-                buyUpgrade(RequipmentList[equipName].Upgrade, true, true);
-                prestigeLeft = true;
+                if (buyUpgrade(RequipmentList[equipName].Upgrade, true, true)) {
+                    prestigeLeft = true;
+                }
               }
             }
         }
@@ -980,7 +994,7 @@ function RautoEquip() {
     var resourceMaxPercent = getPageSetting('Requippercent') / 100;
 
     // Always 2
-    if (alwaysLvl2) {
+    if (alwaysLvl2 && game.global.challengeActive != 'Pandemonium') {
         for (var equip in game.equipment) {
             if (game.equipment[equip].level < 2) {
                 buyEquipment(equip, null, true, 1);
@@ -1011,9 +1025,10 @@ function RautoEquip() {
                             Rgetequipcost(equipName, resourceUsed, 1) <= resourceMaxPercent * game.resources[resourceUsed].owned 
                         ) {
                             if (!game.equipment[equipName].locked) {
-                                buyEquipment(equipName, null, true, 1);
+                                if (buyEquipment(equipName, null, true, 1)){
                                 keepBuying = true;
                             }
+}
                         } 
                     } 
                 } 
