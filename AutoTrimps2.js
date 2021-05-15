@@ -1,4 +1,4 @@
-var ATversion='Zek v4.4.0',atscript=document.getElementById('AutoTrimps-script'),basepath='https://Zorn192.github.io/AutoTrimps/',modulepath='modules/';null!==atscript&&(basepath=atscript.src.replace(/AutoTrimps2\.js$/,''));
+var ATversion='Zek v4.5.0',atscript=document.getElementById('AutoTrimps-script'),basepath='https://Zorn192.github.io/AutoTrimps/',modulepath='modules/';null!==atscript&&(basepath=atscript.src.replace(/AutoTrimps2\.js$/,''));
 function ATscriptLoad(a,b){null==b&&debug('Wrong Syntax. Script could not be loaded. Try ATscriptLoad(modulepath, \'example.js\'); ');var c=document.createElement('script');null==a&&(a=''),c.src=basepath+a+b+'.js',c.id=b+'_MODULE',document.head.appendChild(c)}
 function ATscriptUnload(a){var b=document.getElementById(a+"_MODULE");b&&(document.head.removeChild(b),debug("Removing "+a+"_MODULE","other"))}
 ATscriptLoad(modulepath, 'utils');
@@ -7,7 +7,7 @@ function initializeAutoTrimps() {
     loadPageVariables();
     ATscriptLoad('','SettingsGUI');
     ATscriptLoad('','Graphs');
-    ATmoduleList = ['import-export', 'query', 'calc', 'portal', 'upgrades', 'heirlooms', 'buildings', 'jobs', 'equipment', 'gather', 'stance', 'maps', 'breedtimer', 'dynprestige', 'fight', 'scryer', 'magmite', 'nature', 'other', 'perks', 'fight-info', 'performance'];
+    ATmoduleList = ['import-export', 'query', 'calc', 'portal', 'upgrades', 'heirlooms', 'buildings', 'jobs', 'equipment', 'gather', 'stance', 'maps', 'breedtimer', 'dynprestige', 'fight', 'scryer', 'magmite', 'nature', 'other', 'perks', 'fight-info', 'performance', 'ab'];
     for (var m in ATmoduleList) {
         ATscriptLoad(modulepath, ATmoduleList[m]);
     }
@@ -15,10 +15,11 @@ function initializeAutoTrimps() {
 }
 
 var changelogList = [];
-changelogList.push({date: "15/09/2020", version: "v4.4.1", description: "<b>v5.4.0</b> Fixed things. Check your TF settings U2 people i added a toggle", isNew: false});
+changelogList.push({date: "??/05/2021", version: "v4.5.0", description: "<b>v5.5.0</b> Seperated Tribute and Time farm. Added automation for Pandemonium\, Alchemy and Spire Assault. Updated calcs. Added an option to calc frenzy. Credits to August for adding Staff swap and fixing a few bugs. ", isNew: true});
+changelogList.push({date: "15/09/2020", version: "v4.4.1", description: "<b>v5.4.1</b> Fixed things. Check your TF settings U2 people i added a toggle", isNew: false});
 changelogList.push({date: "06/09/2020", version: "v4.4.0", description: "<b>v5.4.0</b> There is not enough space to describe how much stuff has changed. But its got all 5.4 content ready. <b>CHANGED THE WAY JOBS\, GEAR\, BUILDINGS WORKS! CHECK SETTINGS!</b> ", isNew: false});
 changelogList.push({date: "28/05/2020", version: "v4.3.2", description: "<b>v5.3.8</b> Various bug fixes. <b>CHANGED THE WAY TF GATHER WORKS! CHECK TF SETTINGS!</b> ", isNew: false});
-changelogList.push({date: "08/05/2020", version: "v4.3.1", description: "<b>v5.3.7</b> Various bug fixes. <b>CHANGED THE WAY MELTING POINT SETTING WORKS PLEASE CHECK SETTING IN MAPS!</b> ", isNew: false});
+//changelogList.push({date: "08/05/2020", version: "v4.3.1", description: "<b>v5.3.7</b> Various bug fixes. <b>CHANGED THE WAY MELTING POINT SETTING WORKS PLEASE CHECK SETTING IN MAPS!</b> ", isNew: false});
 //changelogList.push({date: "20/02/2020", version: "v4.3.0", description: "<b>v5.3.0</b> Added Arch. Automated Quest. Fixed bugs. Updated calc. ", isNew: false});
 //changelogList.push({date: "22/11/2019", version: "v4.2.0", description: "<b>v5.2.1</b> Added Quagmire functionality. Added time and tribute farming. Added option to run Dailies in either universe. Added check to c2runner to not run a challenge if you have not unlocked it. Autoallocation sort of fixed. Added Greed to loot dumping. Graphs are still bad when moving between universes. Removed autonu due to being broken. ", isNew: false});
 //changelogList.push({date: "25/08/2019", version: "v4.1.0", description: "<b>v5.1.0</b> <b>CHECK COMBAT FOR BETTERAUTOFIGHT, IF MIGHT BE A BLACK BAR, CLICK IT!</b> A bunch of U2 stuff added, offline progress still being worked on. ", isNew: false});
@@ -261,19 +262,28 @@ function mainLoop() {
         if (getPageSetting('Rshowautomapstatus') == true) RupdateAutoMapsStatus();
         if (getPageSetting('RManualGather2') == 1) RmanualLabor2();
         if (getPageSetting('RTrapTrimps') && game.global.trapBuildAllowed && game.global.trapBuildToggled == false) toggleAutoTrap();
-        if (game.global.challengeActive == "Daily" && getPageSetting('buyradony') >= 1 && getDailyHeliumValue(countDailyWeight()) >= getPageSetting('buyradony') && game.global.b >= 100 && !game.singleRunBonuses.heliumy.owned) purchaseSingleRunBonus('heliumy');    
-        
+        if (game.global.challengeActive == "Daily" && getPageSetting('buyradony') >= 1 && getDailyHeliumValue(countDailyWeight()) >= getPageSetting('buyradony') && game.global.b >= 100 && !game.singleRunBonuses.heliumy.owned) purchaseSingleRunBonus('heliumy');
+
+	//AB
+	if (game.stats.highestRadLevel.valueTotal() >= 75 && getPageSetting('RAB') == true) {
+            if (getPageSetting('RABpreset') == true) ABswitch();
+            if (getPageSetting('RABdustsimple') == 1) ABdustsimple();
+            else if (getPageSetting('RABdustsimple') == 2) ABdustsimplenonhid();
+            if (getPageSetting('RABfarm') == true) ABfarmsave();
+            if (getPageSetting('RABfarmswitch') == true) ABfarmswitch();
+	}
+
         //RBuildings
 	    
-	var smithybought = 0;
+	//var smithybought = 0;
 	    
-	if (!(game.global.challengeActive == "Quest" && game.global.world > 5 && game.global.lastClearedCell < 90 && ([7, 10, 11, 12, 13, 20, 21, 22, 23].indexOf(questcheck()) >= 0))) {
+	//if (!(game.global.challengeActive == "Quest" && game.global.world > 5 && game.global.lastClearedCell < 90 && ([7, 10, 11, 12, 13, 20, 21, 22, 23].indexOf(questcheck()) >= 0))) {
             if (getPageSetting('RBuyBuildingsNew') == true) {
                 RbuyBuildings();
 	    }
-	}
+	//}
 
-	else if (game.global.challengeActive == "Quest" && game.global.world > 5 && questcheck() == 7) {
+	/*else if (game.global.challengeActive == "Quest" && game.global.world > 5 && questcheck() == 7) {
 	    if (smithybought <= 0 && !game.buildings.Smithy.locked && canAffordBuilding('Smithy') && game.global.challengeActive == "Quest" && ((questcheck() == 7) || (RcalcHDratio() * 10 >= getPageSetting('Rmapcuntoff')))) {
 	        buyBuilding("Smithy", true, true, 1);
 	        smithybought = game.global.world;
@@ -281,7 +291,7 @@ function mainLoop() {
             if (smithybought > 0 && game.global.world > smithybought && game.global.challengeActive == "Quest") {
 	        smithybought = 0;
             }
-	}
+	}*/
         
         //RJobs
         if (!(game.global.challengeActive == "Quest" && game.global.world > 5) && getPageSetting('RBuyJobsNew') == 1) {
