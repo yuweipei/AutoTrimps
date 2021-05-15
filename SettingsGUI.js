@@ -695,10 +695,20 @@ function initializeAllSettings() {
     
     //Challenges
 
+    //Hide
+    createSetting('Rchallengehide', 'Hide Stuff', 'Enable seeing the hide challenges buttons. Feel free to turn this off once you are done. ', 'boolean', false, null, 'Challenges');
+    createSetting('Rchallengehidequag', 'Quag', 'Set this on if you wish to hide the Quagmire challenge settings. ', 'boolean', false, null, 'Challenges');
+    createSetting('Rchallengehidearch', 'Arch', 'Set this on if you wish to hide the Archaeology challenge settings. ', 'boolean', false, null, 'Challenges');
+    createSetting('Rchallengehidemayhem', 'Mayhem', 'Set this on if you wish to hide the Mayhem challenge settings. ', 'boolean', false, null, 'Challenges');
+    createSetting('Rchallengehideinsanity', 'Insanity', 'Set this on if you wish to hide the Insanity challenge settings. ', 'boolean', false, null, 'Challenges');
+    createSetting('Rchallengehideexterminate', 'Exterminate', 'Set this on if you wish to hide the Exterminate challenge settings. ', 'boolean', false, null, 'Challenges');
+    createSetting('Rchallengehidenurture', 'Nurture', 'Set this on if you wish to hide the Nurture challenge settings. ', 'boolean', false, null, 'Challenges');
+
     //Quagmire - Black Bogs
-    createSetting('Rblackbog', 'Black Bog', 'Enable Bog Running for Quagmire. ', 'boolean', false, null, 'Challenges');
-    createSetting('Rblackbogzone', 'BB: Zone', 'What zones to run Black Bogs at. Can use 40,50,60. ', 'multiValue', [-1], null, 'Challenges');
-    createSetting('Rblackbogamount', 'BB: Amount', 'How many Black Bogs to at specified zones. Can use 8,9,10. I.e if BB: Zone had 40,50 and this setting had 8,10, It would run 8 Black Bogs at z40 and 10 Black Bogs at z50. ', 'multiValue', [-1], null, 'Challenges');
+    document.getElementById('Rchallengehidenurture').parentNode.insertAdjacentHTML('afterend', '<br>');
+    createSetting('Rblackbog', 'Quagmire', 'Enable Bog Running for Quagmire. ', 'boolean', false, null, 'Challenges');
+    createSetting('Rblackbogzone', 'Zone', 'What zones to run Black Bogs at. Can use 40,50,60. ', 'multiValue', [-1], null, 'Challenges');
+    createSetting('Rblackbogamount', 'Amount', 'How many Black Bogs to at specified zones. Can use 8,9,10. I.e if BB: Zone had 40,50 and this setting had 8,10, It would run 8 Black Bogs at z40 and 10 Black Bogs at z50. ', 'multiValue', [-1], null, 'Challenges');
 
     //Arch
     document.getElementById('Rblackbogamount').parentNode.insertAdjacentHTML('afterend', '<br>');
@@ -1879,6 +1889,52 @@ function updateCustomButtons() {
     radonon && getPageSetting('Ralchon') == true ? turnOn("Ralchfarmlevel") : turnOff("Ralchfarmlevel");
     radonon && getPageSetting('Ralchon') == true ? turnOn("Ralchfarmselection") : turnOff("Ralchfarmselection");
     radonon && getPageSetting('Ralchon') == true ? turnOn("Ralchfarmfrag") : turnOff("Ralchfarmfrag");
+
+    //Hide Challenges
+    radonon ? turnOn("Rchallengehide"): turnOff("Rchallengehide");
+    radonon && getPageSetting('Rchallengehide') == true ? turnOn("Rchallengehidequag") : turnOff("Rchallengehidequag");
+    radonon && getPageSetting('Rchallengehide') == true ? turnOn("Rchallengehidearch") : turnOff("Rchallengehidearch");
+    radonon && getPageSetting('Rchallengehide') == true ? turnOn("Rchallengehidemayhem") : turnOff("Rchallengehidemayhem"); 
+    radonon && getPageSetting('Rchallengehide') == true ? turnOn("Rchallengehideinsanity") : turnOff("Rchallengehideinsanity"); 
+    radonon && getPageSetting('Rchallengehide') == true ? turnOn("Rchallengehideexterminate") : turnOff("Rchallengehideexterminate"); 
+    radonon && getPageSetting('Rchallengehide') == true ? turnOn("Rchallengehidenurture") : turnOff("Rchallengehidenurture"); 
+
+    if (getPageSetting('Rchallengehidequag') == true) {
+            turnOff("Rblackbog");
+            turnOff("Rblackbogzone");
+            turnOff("Rblackbogamount");
+    }
+    if (getPageSetting('Rchallengehidearch') == true) { 
+            turnOff("Rarchon");
+            turnOff("Rarchstring1");
+            turnOff("Rarchstring2");
+            turnOff("Rarchstring3");
+    }
+    if (getPageSetting('Rchallengehidemayhem') == true) { 
+            turnOff("Rmayhemon");
+            turnOff("Rmayhemattack");
+            turnOff("Rmayhemhealth");
+            turnOff("Rmayhemabcut");
+            turnOff("Rmayhemamcut");
+            turnOff("Rmayhemhcut");
+            turnOff("Rmayhemmap");
+    }
+    if (getPageSetting('Rchallengehideinsanity') == true) { 
+            turnOff("Rinsanityon");
+            turnOff("Rinsanityfarmzone");
+            turnOff("Rinsanityfarmcell");
+            turnOff("Rinsanityfarmstack");
+            turnOff("Rinsanityfarmlevel");
+            turnOff("Rinsanityfarmfrag");
+    }
+    if (getPageSetting('Rchallengehideexterminate') == true) { 
+            turnOff("Rexterminateon");
+            turnOff("Rexterminatecalc");
+            turnOff("Rexterminateeq");
+    }
+    if (getPageSetting('Rchallengehidenurture') == true) { 
+            turnOff("Rnurtureon");
+    }
 
     
     
