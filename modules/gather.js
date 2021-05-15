@@ -193,16 +193,28 @@ function RmanualLabor2() {
     else if (Rshouldshipfarm) {
 	     setGather('food');
     }
-    else if ((Rshouldtimefarm || Rshouldtimefarmbogs) && autoTrimpSettings.Rtimegatherselection.selected == "Food") {
+    else if ((Rshouldtimefarm) && autoTrimpSettings.Rtimegatherselection.selected == "Food") {
 	     setGather('food');
     }
-    else if ((Rshouldtimefarm || Rshouldtimefarmbogs) && autoTrimpSettings.Rtimegatherselection.selected == "Wood") {
+    else if ((Rshouldtimefarm) && autoTrimpSettings.Rtimegatherselection.selected == "Wood") {
 	     setGather('wood');
     }
-    else if ((Rshouldtimefarm || Rshouldtimefarmbogs) && autoTrimpSettings.Rtimegatherselection.selected == "Metal") {
+    else if ((Rshouldtimefarm) && autoTrimpSettings.Rtimegatherselection.selected == "Metal") {
 	     setGather('metal');
     }
-    else if ((Rshouldtimefarm || Rshouldtimefarmbogs) && autoTrimpSettings.Rtimegatherselection.selected == "Science") {
+    else if ((Rshouldtimefarm) && autoTrimpSettings.Rtimegatherselection.selected == "Science") {
+	     setGather('science');
+    }
+    else if ((Rshouldtributefarm) && autoTrimpSettings.Rtributegatherselection.selected == "Food") {
+	     setGather('food');
+    }
+    else if ((Rshouldtributefarm) && autoTrimpSettings.Rtributegatherselection.selected == "Wood") {
+	     setGather('wood');
+    }
+    else if ((Rshouldtributefarm) && autoTrimpSettings.Rtributegatherselection.selected == "Metal") {
+	     setGather('metal');
+    }
+    else if ((Rshouldtributefarm) && autoTrimpSettings.Rtributegatherselection.selected == "Science") {
 	     setGather('science');
     }
     else if (getPageSetting('RManualGather2') != 2 && game.resources.science.owned < MODULES["gather"].RminScienceAmount && document.getElementById('scienceCollectBtn').style.display != 'none' && document.getElementById('science').style.visibility != 'hidden') {
