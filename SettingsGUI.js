@@ -1429,6 +1429,9 @@ function updateCustomButtons() {
     if (document.getElementById("tabChallenges") != null) {
         document.getElementById("tabChallenges").style.display = !radonon ? "none" : "";
     }
+    if (document.getElementById("tabSA") != null) {
+        document.getElementById("tabSA").style.display = !radonon ? "none" : "";
+    }
 
     
 
