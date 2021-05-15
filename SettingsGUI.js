@@ -935,7 +935,7 @@ function initializeAllSettings() {
 
     //AB
 
-    createSetting('RAB', 'SA', 'Turn on SA settings and allow them to work. ', 'boolean', false, null, "SA");
+    createSetting('RAB', 'SA', 'Turn on SA settings and allow them to work. Do not open input settings when SA is on or you will crash. ', 'boolean', false, null, "SA");
     createSetting('RABpreset', 'Presets', 'Automatically switch presets depending on current enemy. You must make sure preset 1 is for Poison\, preset 2 Bleed and preset 3 Shock. If enemy has less than 2 resistances it will switch between the non-resisted presets till you kill the enemy. It will not purchase any equips or try different ones though so it may get stuck till you update your presets. ', 'boolean', false, null, "SA");
     createSetting('RABdustsimple', ['Simple Dust Off', 'SD: Equipped', 'SD: Non-hidden'], 'SD: Equipped automatically upgrades currently equipped items by lowest price. SD: Non-hidden automatically upgrades items that are not hidden and not equipped. ', 'multitoggle', 0, null, 'SA');
     createSetting('RABfarm', 'Save String', 'Saves your best Dust/s using SA level and your equipped items in a string. If this is on it will continously check your dust/s and generate a farm string if you beat your previous best. ', 'boolean', false, null, "SA");
@@ -1226,7 +1226,6 @@ function settingChanged(id) {
 }
 
 function autoSetValueToolTip(id, text,negative, multi) {
-    requestAnimationFrame(cancelTooltip);
     ranstring = text;
     var elem = document.getElementById("tooltipDiv");
     var tooltipText = 'Type a number below. You can also use shorthand such as 2e5 or 200k.';
@@ -1253,7 +1252,6 @@ function autoSetValueToolTip(id, text,negative, multi) {
 }
 
 function autoSetTextToolTip(id,text) {
-    requestAnimationFrame(cancelTooltip);
     ranstring = text;
     var elem = document.getElementById("tooltipDiv");
     var tooltipText = 'Type your input below';
