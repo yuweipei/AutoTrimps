@@ -549,7 +549,7 @@ function RbuyJobs() {
     // Calculate how much of each worker we should have
     // If focused farming go all in for caches
     var allIn = "";
-    if (Rshouldtimefarmbogs || Rshouldtimefarm) {
+    if (Rshouldtimefarm) {
         if (autoTrimpSettings.Rtimespecialselection.selected.includes('wc')) {
             allIn = "Lumberjack";
         } else if (autoTrimpSettings.Rtimespecialselection.selected.includes('sc')) {
@@ -557,6 +557,17 @@ function RbuyJobs() {
         } else if (autoTrimpSettings.Rtimespecialselection.selected.includes('mc')) {
             allIn = "Miner";
         } else if (autoTrimpSettings.Rtimespecialselection.selected.includes('rc')) {
+            allIn = "Scientist";
+        }
+    }
+    if (Rshouldtributefarm) {
+        if (autoTrimpSettings.Rtributespecialselection.selected.includes('wc')) {
+            allIn = "Lumberjack";
+        } else if (autoTrimpSettings.Rtributespecialselection.selected.includes('sc')) {
+            allIn = "Farmer";
+        } else if (autoTrimpSettings.Rtributespecialselection.selected.includes('mc')) {
+            allIn = "Miner";
+        } else if (autoTrimpSettings.Rtributespecialselection.selected.includes('rc')) {
             allIn = "Scientist";
         }
     }
