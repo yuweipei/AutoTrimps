@@ -136,7 +136,7 @@ function ABfarmsave() {
     if (getPageSetting('RABfarmstring') == "-1") {
         setPageSetting('RABfarmstring', string);
     }
-    else if (autoBattle.sessionEnemiesKilled > 2 && autoBattle.sessionEnemiesKilled > autoBattle.sessionTrimpsKilled && bestdust > 0 && autoTrimpSettings.RABfarmstring.value[1] < bestdust) {
+    else if (autoBattle.sessionEnemiesKilled > 8 && autoBattle.sessionEnemiesKilled > autoBattle.sessionTrimpsKilled && bestdust > 0 && autoTrimpSettings.RABfarmstring.value[1] < bestdust) {
         setPageSetting('RABfarmstring', string);
     }
 }
