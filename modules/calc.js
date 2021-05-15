@@ -832,6 +832,8 @@ function RcalcOurHealth() {
     if (game.buildings.Smithy.owned > 0) {
 		health *= Math.pow(1.25, game.buildings.Smithy.owned);
     }
+	//Antenna Array
+	health *= game.buildings.Antenna.owned >= 10 ? game.jobs.Meteorologist.getExtraMult() : 1;
     if (game.portal.Toughness.radLevel > 0) {
         health *= ((game.portal.Toughness.radLevel * game.portal.Toughness.modifier) + 1);
     }
@@ -881,15 +883,18 @@ function RcalcOurHealth() {
 	health *= game.challenges.Nurture.getStatBoost();
     }
 
-    health *= autoBattle.bonuses.Stats.getMult();
+	//Alchemy Mult
+	health *= alchObj.getPotionEffect('Potion of Strength');
+
+	//AutoBattle
+	health *= autoBattle.bonuses.Stats.getMult();
 
     if (typeof game.global.dailyChallenge.pressure !== 'undefined') {
         health *= (dailyModifiers.pressure.getMult(game.global.dailyChallenge.pressure.strength, game.global.dailyChallenge.pressure.stacks));
     }
 	
-    //Pris
-	
-    health *= (getEnergyShieldMult() + 1);
+	//Prismatic Shield and Shield Layer, scales with multiple Scruffy shield layers
+	health *= Fluffy.isRewardActive('shieldlayer') ? 1 + (getEnergyShieldMult() * (1 + Fluffy.isRewardActive('shieldlayer'))) : 1 + getEnergyShieldMult();
 	
     return health;
 }
