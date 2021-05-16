@@ -172,3 +172,7 @@ function ABfarmswitch() {
         autoBattle.resetCombat(true);
     }
 }
+
+function ABsolver() {
+
+}
