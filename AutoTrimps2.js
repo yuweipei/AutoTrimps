@@ -271,6 +271,7 @@ function mainLoop() {
             else if (getPageSetting('RABdustsimple') == 2) ABdustsimplenonhid();
             if (getPageSetting('RABfarm') == true) ABfarmsave();
             if (getPageSetting('RABfarmswitch') == true) ABfarmswitch();
+            if (getPageSetting('RABsolve') == true) ABsolver();
 	}
 
         //RBuildings
