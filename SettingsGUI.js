@@ -941,6 +941,7 @@ function initializeAllSettings() {
     createSetting('RABfarm', 'Save String', 'Saves your best Dust/s using SA level and your equipped items in a string. If this is on it will continously check your dust/s and generate a farm string if you beat your previous best. ', 'boolean', false, null, "SA");
     createSetting('RABfarmswitch', 'Switch', 'If this is on it will swtich directly to the SA level and equipped items. ', 'boolean', false, null, "SA");
     createSetting('RABfarmstring', 'String', 'This is your best farming string. Feel free to share it with other AT users. If you do use a shared string I advise you to change the second value (the dust part) to 0 so it calcs the actual dust you get instead of the shared strings. ', 'textValue', '-1', null, "SA");
+    createSetting('RABsolve', 'Solver', 'Solves your current level including farming\, item levels\, and contracts. Currently does up to 23. ', 'boolean', false, null, "SA");
 
 
 
@@ -2009,6 +2010,7 @@ function updateCustomButtons() {
     radonon && getPageSetting('RAB') == true ? turnOn("RABfarm"): turnOff("RABfarm");
     radonon && getPageSetting('RAB') == true ? turnOn("RABfarmswitch"): turnOff("RABfarmswitch");
     radonon && getPageSetting('RAB') == true ? turnOn("RABfarmstring"): turnOff("RABfarmstring");
+    radonon && getPageSetting('RAB') == true ? turnOn("RABfarmsolve"): turnOff("RABfarmsolve");
 
 
     //Nature
