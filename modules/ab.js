@@ -161,13 +161,13 @@ function ABfarmswitch() {
         var plength = preset.length;
         if (plength > autoBattle.getMaxItems()) plength = autoBattle.getMaxItems();
         for (var item in autoBattle.items){
-            autoBattle.items[item].equipped = false;
-            if (autoBattle.settings.loadHide.enabled) autoBattle.items[item].hidden = (autoBattle.items[item].owned) ? true : false;
+             autoBattle.items[item].equipped = false;
+             if (autoBattle.settings.loadHide.enabled) autoBattle.items[item].hidden = (autoBattle.items[item].owned) ? true : false;
         }
         for (var x = 0; x < plength; x++){
             if (!autoBattle.items[preset[x]] || !autoBattle.items[preset[x]].owned) continue;
-            autoBattle.items[preset[x]].equipped = true;
-            autoBattle.items[preset[x]].hidden = false;
+                autoBattle.items[preset[x]].equipped = true;
+                autoBattle.items[preset[x]].hidden = false;
         }
         autoBattle.resetCombat(true);
     }
@@ -175,4 +175,104 @@ function ABfarmswitch() {
 
 function ABsolver() {
 
+    if (autoBattle.autoLevel) autoBattle.toggleAutoLevel();
+
+    var max = autoBattle.maxEnemyLevel;
+    var items = [];
+    var level = [];
+
+    //Solver
+
+    switch(max) {
+        case 1:
+        items = ['Sword','Armor','Fists_of_Goo','Battery_Stick'];
+        level = [2,1,1,1];
+        if (autoBattle.enemyLevel != 1) {
+            autoBattle.enemyLevel = 1;
+            autoBattle.resetCombat(true);
+        }
+		break;
+        case 2:
+        items = ['Sword','Armor','Fists_of_Goo','Battery_Stick'];
+        level = [3,2,1,2];
+        if (autoBattle.enemyLevel != 2) {
+            autoBattle.enemyLevel = 2;
+            autoBattle.resetCombat(true);
+        }
+		break;
+        case 3:
+        if (autoBattle.bonuses.Extra_Limbs.level < 1) {
+            items = ['Sword','Armor','Fists_of_Goo','Battery_Stick'];
+            level = [4,2,2,2];
+            for (var equip in autoBattle.items) {
+                if (autoBattle.items[equip].level < level[items.indexOf(equip)]) {
+                    if (autoBattle.enemyLevel != 2) {
+                        autoBattle.enemyLevel = 2;
+                        autoBattle.resetCombat(true);
+                    }
+                }
+                if (autoBattle.items[equip].level >= level[items.indexOf(equip)]) {
+                    if (autoBattle.bonuses.Extra_Limbs.level < 1) {
+                        autoBattle.buyBonus('Extra_Limbs');
+                    }
+                }
+            }
+        }
+        
+        if (autoBattle.bonuses.Extra_Limbs.level >= 1) {
+            items = ['Sword','Armor','Fists_of_Goo','Battery_Stick','Pants'];
+            level = [4,3,2,2,4];
+            for (var equip in autoBattle.items) {
+                if (autoBattle.items[equip].level < level[items.indexOf(equip)]) {
+                    if (autoBattle.enemyLevel != 2) {
+                        autoBattle.enemyLevel = 2;
+                        autoBattle.resetCombat(true);
+                        console.log("not level 2");
+                    }
+                }
+                else if (autoBattle.items[equip].level >= level[items.indexOf(equip)]) {
+                    if (autoBattle.enemyLevel != 3) {
+                        autoBattle.enemyLevel = 3;
+                        autoBattle.resetCombat(true);
+                        console.log("not level 3");
+                    }
+                }
+            }
+        }
+		break;
+    }
+
+    //Equip items
+    
+    var match = false;
+    for (var item in autoBattle.items) {
+        if (autoBattle.items[item].equipped && items.indexOf(item) == -1) {
+            match = true;
+        }
+    }
+
+    if (match) {
+        var preset = items;
+        var plength = preset.length;
+        if (plength > autoBattle.getMaxItems()) plength = autoBattle.getMaxItems();
+        for (var item in autoBattle.items){
+             autoBattle.items[item].equipped = false;
+             if (autoBattle.settings.loadHide.enabled) autoBattle.items[item].hidden = (autoBattle.items[item].owned) ? true : false;
+        }
+        for (var x = 0; x < plength; x++){
+            if (!autoBattle.items[preset[x]] || !autoBattle.items[preset[x]].owned) continue;
+                autoBattle.items[preset[x]].equipped = true;
+                autoBattle.items[preset[x]].hidden = false;
+        }
+        autoBattle.resetCombat(true);
+    }
+
+    //Level items
+    
+    for (var equip in autoBattle.items) {
+        if (autoBattle.items[equip].level < level[items.indexOf(equip)]) {
+            autoBattle.upgrade(equip);
+        }
+    }
+    
 }
