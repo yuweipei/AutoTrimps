@@ -1548,7 +1548,7 @@ function RautoMap() {
 
     //Contract
     if (autoBattle.activeContract != '') {
-	if (getPageSetting('ABsolve') == true && contractVoid) {
+	if (getPageSetting('RABsolve') == true && contractVoid) {
 	    RneedToVoid = true;
 	}
     }
