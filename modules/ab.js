@@ -280,7 +280,7 @@ function ABsolver() {
         };
 
         for (var item of items) {
-            autoBattle.equip(item);
+	    if (autoBattle.items[item].owned) autoBattle.equip(item);
         }
     }
 
