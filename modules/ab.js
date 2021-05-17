@@ -114,8 +114,6 @@ function ABdustsimplenonhid() {
     if (autoBattle.dust >= equips[0][1]) autoBattle.upgrade(equips[0][0]);
 }
 
-//getPageSetting('RABfarmstring').split(',');
-
 function ABfarmsave() {
 
     var equips = [];
@@ -222,15 +220,17 @@ function ABsolver() {
         if (autoBattle.bonuses.Extra_Limbs.level >= 1) {
             items = ['Sword','Armor','Fists_of_Goo','Battery_Stick','Pants'];
             level = [4,3,2,2,4];
+	    var proceed = true;
             for (var equip in autoBattle.items) {
                 if (autoBattle.items[equip].level < level[items.indexOf(equip)]) {
+		    proceed = false;
                     if (autoBattle.enemyLevel != 2) {
                         autoBattle.enemyLevel = 2;
                         autoBattle.resetCombat(true);
                         console.log("not level 2");
                     }
                 }
-                else if (autoBattle.items[equip].level >= level[items.indexOf(equip)]) {
+                if (proceed && autoBattle.items[equip].level >= level[items.indexOf(equip)]) {
                     if (autoBattle.enemyLevel != 3) {
                         autoBattle.enemyLevel = 3;
                         autoBattle.resetCombat(true);
@@ -239,15 +239,15 @@ function ABsolver() {
                 }
             }
         }
-		break;
+	break;
     }
 
     //Equip items
     
     var needsEquipChange = false;
 
-    for (var item in items) {
-        if (autoBattle.items[item].equipped = false) { needsEquipChange = true;}
+    for (var item of items) {
+        if (autoBattle.items[item].equipped == false) { needsEquipChange = true;}
     }
 
     if (needsEquipChange) {
@@ -255,8 +255,8 @@ function ABsolver() {
             autoBattle.items[item].equipped = false;
         };
 
-        for (var item in items) {
-            autoBattle.items[item].equipped = true;
+        for (var item of items) {
+            autoBattle.equip(item);
         }
     }
 
