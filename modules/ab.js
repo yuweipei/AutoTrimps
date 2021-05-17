@@ -244,27 +244,20 @@ function ABsolver() {
 
     //Equip items
     
-    var match = false;
-    for (var item in autoBattle.items) {
-        if (autoBattle.items[item].equipped && items.indexOf(item) == -1) {
-            match = true;
-        }
+    var needsEquipChange = false;
+
+    for (var item in items) {
+        if (autoBattle.items[item].equipped = false) { needsEquipChange = true;}
     }
 
-    if (match) {
-        var preset = items;
-        var plength = preset.length;
-        if (plength > autoBattle.getMaxItems()) plength = autoBattle.getMaxItems();
-        for (var item in autoBattle.items){
-             autoBattle.items[item].equipped = false;
-             if (autoBattle.settings.loadHide.enabled) autoBattle.items[item].hidden = (autoBattle.items[item].owned) ? true : false;
+    if (needsEquipChange) {
+        for (var item in autoBattle.items) {
+            autoBattle.items[item].equipped = false;
+        };
+
+        for (var item in items) {
+            autoBattle.items[item].equipped = true;
         }
-        for (var x = 0; x < plength; x++){
-            if (!autoBattle.items[preset[x]] || !autoBattle.items[preset[x]].owned) continue;
-                autoBattle.items[preset[x]].equipped = true;
-                autoBattle.items[preset[x]].hidden = false;
-        }
-        autoBattle.resetCombat(true);
     }
 
     //Level items
