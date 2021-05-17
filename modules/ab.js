@@ -178,6 +178,7 @@ function ABsolver() {
     var max = autoBattle.maxEnemyLevel;
     var items = [];
     var level = [];
+    var contract = '';
 
     //Solver
 
@@ -189,7 +190,8 @@ function ABsolver() {
             autoBattle.enemyLevel = 1;
             autoBattle.resetCombat(true);
         }
-		break;
+	break;
+
         case 2:
         items = ['Sword','Armor','Fists_of_Goo','Battery_Stick'];
         level = [3,2,1,2];
@@ -197,7 +199,8 @@ function ABsolver() {
             autoBattle.enemyLevel = 2;
             autoBattle.resetCombat(true);
         }
-		break;
+	break;
+
         case 3:
         if (autoBattle.bonuses.Extra_Limbs.level < 1) {
             items = ['Sword','Armor','Fists_of_Goo','Battery_Stick'];
@@ -220,26 +223,47 @@ function ABsolver() {
         if (autoBattle.bonuses.Extra_Limbs.level >= 1) {
             items = ['Sword','Armor','Fists_of_Goo','Battery_Stick','Pants'];
             level = [4,3,2,2,4];
-	    var proceed = true;
+            var proceed = true;
             for (var equip in autoBattle.items) {
                 if (autoBattle.items[equip].level < level[items.indexOf(equip)]) {
 		    proceed = false;
-                    if (autoBattle.enemyLevel != 2) {
-                        autoBattle.enemyLevel = 2;
-                        autoBattle.resetCombat(true);
-                        console.log("not level 2");
-                    }
-                }
-                if (proceed && autoBattle.items[equip].level >= level[items.indexOf(equip)]) {
-                    if (autoBattle.enemyLevel != 3) {
-                        autoBattle.enemyLevel = 3;
-                        autoBattle.resetCombat(true);
-                        console.log("not level 3");
-                    }
-                }
+		}
+            }
+
+            if (!proceed && autoBattle.enemyLevel != 2) {
+                autoBattle.enemyLevel = 2;
+                autoBattle.resetCombat(true);
+            }
+
+            if (proceed && autoBattle.enemyLevel != 3) {
+                autoBattle.enemyLevel = 3;
+                autoBattle.resetCombat(true);
             }
         }
 	break;
+
+        case 4:
+
+	contract = 'Raincoat';
+
+	if (!autoBattle.items[contract].owned) {
+	    autoBattle.acceptContract(contract);
+	    if (autoBattle.activeContract == contract) {
+		if (game.global.world >= autoBattle.items[contract].zone) {
+		    contractVoid = true;
+		}
+	    }
+	}
+	else if (autoBattle.items.Raincoat.owned) {
+            items = ['Rusty_Dagger','Fists_of_Goo','Battery_Stick','Pants','Raincoat'];
+            level = [3,2,3,4,3];
+            if (autoBattle.enemyLevel != 4) {
+                autoBattle.enemyLevel = 4;
+                autoBattle.resetCombat(true);
+            }
+	}
+	break;
+
     }
 
     //Equip items
