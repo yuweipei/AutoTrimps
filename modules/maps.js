@@ -1546,6 +1546,13 @@ function RautoMap() {
         }
     }
 
+    //Contract
+    if (autoBattle.activeContract != '') {
+	if (getPageSetting('ABsolver') == true && contractVoid) {
+	    RneedToVoid = true;
+	}
+    }
+
     //Voids
     if (RneedToVoid) {
         var voidArray = [];
@@ -1608,13 +1615,6 @@ function RautoMap() {
                 selectedMap = theMap.id;
             break;
         }
-    }
-
-    //Contract
-    if (autoBattle.activeContract != '') {
-	if (getPageSetting('ABsolver') == true && contractVoid) {
-	    RneedToVoid = true;
-	}
     }
 
     //Automaps
