@@ -803,7 +803,7 @@ var Ralchfragfarming = false;
 var alchfragmappy = undefined;
 var alchprefragmappy = undefined;
 var alchfragmappybought = false;
-
+var contractVoid = false;
 
 function RupdateAutoMapsStatus(get) {
 
@@ -812,6 +812,7 @@ function RupdateAutoMapsStatus(get) {
     //Fail Safes
     if (getPageSetting('RAutoMaps') == 0) status = 'Off';
 
+    else if (contractVoid) status = 'Contract';
     else if (Rshouldshipfarm) status = 'Ship Farming';
     else if (Rshouldequipfarm) status = 'Equip Farming to ' + equipfarmdynamicHD().toFixed(2) + " and " + estimateEquipsForZone()[2] + " Equality";
     else if (Rshouldstormfarm) status = 'Storm Farming to ' + stormdynamicHD().toFixed(2);
@@ -977,6 +978,7 @@ function RautoMap() {
     Rshouldstormfarm = false;
     Rshouldequipfarm = false;
     Rshouldshipfarm = false;
+    contractVoid = false;
     if (ourBaseDamage > 0) {
         RshouldDoMaps = (!RenoughDamage || RshouldFarm || RscryerStuck);
     }
@@ -1606,6 +1608,13 @@ function RautoMap() {
                 selectedMap = theMap.id;
             break;
         }
+    }
+
+    //Contract
+    if (autoBattle.activeContract != '') {
+	if (getPageSetting('ABsolver') == true && contractVoid) {
+	    RneedToVoid = true;
+	}
     }
 
     //Automaps
