@@ -939,6 +939,14 @@ function RautoMap() {
         RdoVoids = false;
     }
 
+    //Contract
+    if (autoBattle.activeContract != '') {
+	if (getPageSetting('RABsolve') == true && contractVoid) {
+            RneedToVoid = true;
+	    RdoVoids = true;
+	}
+    }
+
     //Calc
     var ourBaseDamage = RcalcOurDmg("avg", false, true);
     var enemyDamage = RcalcBadGuyDmg(null, RgetEnemyMaxAttack(game.global.world, 50, 'Snimp', 1.0));
@@ -1546,53 +1554,6 @@ function RautoMap() {
                 }
             }
         }
-    }
-
-    //Contract
-    if (autoBattle.activeContract != '') {
-	if (getPageSetting('RABsolve') == true && contractVoid) {
-	    var voidArray = [];
-        var prefixlist = {
-            'Deadly': 10,
-            'Heinous': 11,
-            'Poisonous': 20,
-            'Destructive': 30
-        };
-        var prefixkeys = Object.keys(prefixlist);
-        var suffixlist = {
-            'Descent': 7.077,
-            'Void': 8.822,
-            'Nightmare': 9.436,
-            'Pit': 10.6
-        };
-        var suffixkeys = Object.keys(suffixlist);
-
-            for (var map in game.global.mapsOwnedArray) {
-                var theMap = game.global.mapsOwnedArray[map];
-                if (theMap.location == 'Void') {
-                    for (var pre in prefixkeys) {
-                        if (theMap.name.includes(prefixkeys[pre]))
-                            theMap.sortByDiff = 1 * prefixlist[prefixkeys[pre]];
-                    }
-                    for (var suf in suffixkeys) {
-                        if (theMap.name.includes(suffixkeys[suf]))
-                            theMap.sortByDiff += 1 * suffixlist[suffixkeys[suf]];
-                    }
-                    voidArray.push(theMap);
-                }
-            }
-
-        var voidArraySorted = voidArray.sort(function (a, b) {
-            return a.sortByDiff - b.sortByDiff;
-        });
-        for (var map in voidArraySorted) {
-            var theMap = voidArraySorted[map];
-            RdoVoids = true;
-            if (!restartVoidMap)
-                selectedMap = theMap.id;
-            break;
-        }
-	}
     }
 
     //Voids
