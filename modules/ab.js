@@ -244,23 +244,60 @@ function ABsolver() {
 
         case 4:
 
-	contract = 'Raincoat';
-
-	if (!autoBattle.items[contract].owned) {
-	    autoBattle.acceptContract(contract);
-	    if (autoBattle.activeContract == contract) {
-		if (game.global.world >= autoBattle.items[contract].zone) {
-		    contractVoid = true;
-		}
-	    }
+        if (!autoBattle.items.Raincoat.owned) {
+	    contract = 'Raincoat';
 	}
-	else if (autoBattle.items.Raincoat.owned) {
+
+	if (autoBattle.items.Raincoat.owned) {
             items = ['Rusty_Dagger','Fists_of_Goo','Battery_Stick','Pants','Raincoat'];
             level = [3,2,3,4,3];
             if (autoBattle.enemyLevel != 4) {
                 autoBattle.enemyLevel = 4;
                 autoBattle.resetCombat(true);
             }
+	}
+	break;
+
+	case 5:
+
+        if (autoBattle.enemyLevel != 5) {
+            autoBattle.enemyLevel = 5;
+            autoBattle.resetCombat(true);
+        }
+
+        if (!autoBattle.items.Putrid_Pouch.owned) {
+            items = ['Rusty_Dagger','Fists_of_Goo','Battery_Stick','Pants','Raincoat'];
+            level = [3,3,3,4,3];
+            var proceed = true;
+            for (var equip in autoBattle.items) {
+                if (autoBattle.items[equip].level < level[items.indexOf(equip)]) {
+		    proceed = false;
+		}
+            }
+	    if (proceed) {
+		if (!autoBattle.items.Putrid_Pouch.owned) {
+	            contract = 'Putrid_Pouch';
+	        }
+	    }
+        }
+	if (autoBattle.items.Putrid_Pouch.owned) {
+            items = ['Rusty_Dagger','Fists_of_Goo','Battery_Stick','Raincoat','Putrid_Pouch'];
+            level = [3,3,3,3,3];
+            var proceed2 = true;
+            for (var equip in autoBattle.items) {
+                if (autoBattle.items[equip].level < level[items.indexOf(equip)]) {
+		    proceed2 = false;
+		}
+            }
+	    if (proceed2) {
+		if (!autoBattle.items.Chemistry_Set.owned) {
+	            contract = 'Chemistry_Set';
+	        }
+	    }
+	}
+	if (autoBattle.items.Chemistry_Set.owned) {
+            items = ['Menacing_Mask','Fists_of_Goo','Battery_Stick','Putrid_Pouch','Chemistry_Set'];
+            level = [4,3,3,3,2];
 	}
 	break;
 
@@ -289,6 +326,17 @@ function ABsolver() {
     for (var equip in autoBattle.items) {
         if (autoBattle.items[equip].level < level[items.indexOf(equip)]) {
             autoBattle.upgrade(equip);
+        }
+    }
+
+    //Contract
+
+    if (contract != '' && !autoBattle.items[contract].owned) {
+	autoBattle.acceptContract(contract);
+	if (autoBattle.activeContract == contract) {
+	    if (game.global.world >= autoBattle.items[contract].zone) {
+		contractVoid = true;
+	    }
         }
     }
     
