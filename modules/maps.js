@@ -979,6 +979,8 @@ function RautoMap() {
     Rshouldequipfarm = false;
     Rshouldshipfarm = false;
     contractVoid = false;
+    Rshouldmayhem = 0;
+    Rshouldpanda = false;
     if (ourBaseDamage > 0) {
         RshouldDoMaps = (!RenoughDamage || RshouldFarm || RscryerStuck);
     }
