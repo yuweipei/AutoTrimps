@@ -190,19 +190,23 @@ function ABsolver() {
     //Solver
 
     switch(max) {
+
         case 1:
+
         items = ['Sword','Armor','Fists_of_Goo','Battery_Stick'];
         level = [2,1,1,1];
         ABlevelswitch(1);
 	break;
 
         case 2:
+
         items = ['Sword','Armor','Fists_of_Goo','Battery_Stick'];
         level = [3,2,1,2];
         ABlevelswitch(2);
 	break;
 
         case 3:
+
         if (autoBattle.bonuses.Extra_Limbs.level < 1) {
             items = ['Sword','Armor','Fists_of_Goo','Battery_Stick'];
             level = [4,2,2,2];
@@ -293,6 +297,65 @@ function ABsolver() {
 	}
 	break;
 
+        case 6:
+
+        ABlevelswitch(6);
+
+        if (!autoBattle.items.Labcoat.owned) {
+            items = ['Menacing_Mask','Fists_of_Goo','Battery_Stick','Putrid_Pouch','Chemistry_Set'];
+            level = [4,3,3,3,2];
+            var proceed = true;
+            for (var equip in autoBattle.items) {
+                if (autoBattle.items[equip].level < level[items.indexOf(equip)]) {
+		    proceed = false;
+		}
+            }
+	    if (proceed) {
+		if (!autoBattle.items.Labcoat.owned) {
+	            contract = 'Labcoat';
+	        }
+	    }
+        }
+        if (autoBattle.items.Labcoat.owned) {
+            items = ['Fists_of_Goo','Battery_Stick','Putrid_Pouch','Chemistry_Set','Labcoat'];
+            level = [3,4,3,2,1];
+	}
+        break;
+        
+	case 7:
+
+        items = ['Fists_of_Goo','Battery_Stick','Putrid_Pouch','Chemistry_Set','Labcoat'];
+        level = [3,4,3,4,2];
+        ABlevelswitch(7);
+	break;
+
+        case 8:
+
+        ABlevelswitch(8);
+
+        if (!autoBattle.items.Comfy_Boots.owned) {
+            items = ['Fists_of_Goo','Battery_Stick','Putrid_Pouch','Chemistry_Set','Labcoat'];
+            level = [4,5,3,4,2];
+            var proceed = true;
+            for (var equip in autoBattle.items) {
+                if (autoBattle.items[equip].level < level[items.indexOf(equip)]) {
+		    proceed = false;
+		}
+            }
+	    if (proceed) {
+		if (!autoBattle.items.Comfy_Boots.owned) {
+	            contract = 'Comfy_Boots';
+	        }
+	    }
+        }
+        if (autoBattle.items.Comfy_Boots.owned) {
+            items = ['Fists_of_Goo','Battery_Stick','Putrid_Pouch','Chemistry_Set','Labcoat'];
+            level = [4,5,3,4,2];
+	    if (autoBattle.items.Comfy_Boots.level < 3) {
+                autoBattle.upgrade('Comfy_Boots');
+	    }
+	}
+        break;
     }
 
     //Equip items
