@@ -171,6 +171,13 @@ function ABfarmswitch() {
     }
 }
 
+function ABlevelswitch(level) {
+    if (autoBattle.enemyLevel != level) {
+        autoBattle.enemyLevel = level;
+        autoBattle.resetCombat(true);
+    }
+}
+
 function ABsolver() {
 
     if (autoBattle.autoLevel) autoBattle.toggleAutoLevel();
@@ -186,19 +193,13 @@ function ABsolver() {
         case 1:
         items = ['Sword','Armor','Fists_of_Goo','Battery_Stick'];
         level = [2,1,1,1];
-        if (autoBattle.enemyLevel != 1) {
-            autoBattle.enemyLevel = 1;
-            autoBattle.resetCombat(true);
-        }
+        ABlevelswitch(1);
 	break;
 
         case 2:
         items = ['Sword','Armor','Fists_of_Goo','Battery_Stick'];
         level = [3,2,1,2];
-        if (autoBattle.enemyLevel != 2) {
-            autoBattle.enemyLevel = 2;
-            autoBattle.resetCombat(true);
-        }
+        ABlevelswitch(2);
 	break;
 
         case 3:
@@ -207,10 +208,7 @@ function ABsolver() {
             level = [4,2,2,2];
             for (var equip in autoBattle.items) {
                 if (autoBattle.items[equip].level < level[items.indexOf(equip)]) {
-                    if (autoBattle.enemyLevel != 2) {
-                        autoBattle.enemyLevel = 2;
-                        autoBattle.resetCombat(true);
-                    }
+                    ABlevelswitch(2);
                 }
                 if (autoBattle.items[equip].level >= level[items.indexOf(equip)]) {
                     if (autoBattle.bonuses.Extra_Limbs.level < 1) {
@@ -251,19 +249,13 @@ function ABsolver() {
 	if (autoBattle.items.Raincoat.owned) {
             items = ['Rusty_Dagger','Fists_of_Goo','Battery_Stick','Pants','Raincoat'];
             level = [3,2,3,4,3];
-            if (autoBattle.enemyLevel != 4) {
-                autoBattle.enemyLevel = 4;
-                autoBattle.resetCombat(true);
-            }
+            ABlevelswitch(4);
 	}
 	break;
 
 	case 5:
 
-        if (autoBattle.enemyLevel != 5) {
-            autoBattle.enemyLevel = 5;
-            autoBattle.resetCombat(true);
-        }
+        ABlevelswitch(5);
 
         if (!autoBattle.items.Putrid_Pouch.owned) {
             items = ['Rusty_Dagger','Fists_of_Goo','Battery_Stick','Pants','Raincoat'];
