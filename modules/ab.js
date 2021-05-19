@@ -193,16 +193,20 @@ function ABsolver() {
 
         case 1:
 
+        ABlevelswitch(1);
+
         items = ['Sword','Armor','Fists_of_Goo','Battery_Stick'];
         level = [2,1,1,1];
-        ABlevelswitch(1);
+        
 	break;
 
         case 2:
 
+        ABlevelswitch(2);
+
         items = ['Sword','Armor','Fists_of_Goo','Battery_Stick'];
         level = [3,2,1,2];
-        ABlevelswitch(2);
+        
 	break;
 
         case 3:
@@ -242,6 +246,7 @@ function ABsolver() {
                 autoBattle.resetCombat(true);
             }
         }
+
 	break;
 
         case 4:
@@ -255,6 +260,7 @@ function ABsolver() {
             level = [3,2,3,4,3];
             ABlevelswitch(4);
 	}
+
 	break;
 
 	case 5:
@@ -295,6 +301,7 @@ function ABsolver() {
             items = ['Menacing_Mask','Fists_of_Goo','Battery_Stick','Putrid_Pouch','Chemistry_Set'];
             level = [4,3,3,3,2];
 	}
+
 	break;
 
         case 6:
@@ -320,6 +327,7 @@ function ABsolver() {
             items = ['Fists_of_Goo','Battery_Stick','Putrid_Pouch','Chemistry_Set','Labcoat'];
             level = [3,4,3,2,1];
 	}
+
         break;
         
 	case 7:
@@ -327,6 +335,7 @@ function ABsolver() {
         items = ['Fists_of_Goo','Battery_Stick','Putrid_Pouch','Chemistry_Set','Labcoat'];
         level = [3,4,3,4,2];
         ABlevelswitch(7);
+
 	break;
 
         case 8:
@@ -355,6 +364,7 @@ function ABsolver() {
                 autoBattle.upgrade('Comfy_Boots');
 	    }
 	}
+
         break;
     }
 
