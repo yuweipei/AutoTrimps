@@ -437,7 +437,7 @@ function ABsolver() {
 	}
 	if (autoBattle.items.Hungering_Mold.level >= 2 && autoBattle.items.Mood_Bracelet.level >= 3 && autoBattle.items.Putrid_Pouch.level >= 4) {
 	    contract: 'Bad_Medkit';
-            items = ['Fists_of_Goo','Putrid_Pouch','Chemistry_Set','Labcoat','Mood Bracelet','Hungering_Mold'];
+            items = ['Fists_of_Goo','Putrid_Pouch','Chemistry_Set','Labcoat','Mood_Bracelet','Hungering_Mold'];
             level = [4,4,4,2,3,2];
             ABlevelswitch(10);
             if (autoBattle.items.Bad_Medkit.level < 3) {
