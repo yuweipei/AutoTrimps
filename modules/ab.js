@@ -406,24 +406,24 @@ function ABsolver() {
         if (!autoBattle.items.Mood_Bracelet.owned) {
 	    contract = 'Mood_Bracelet';
             items = ['Rusty_Dagger','Fists_of_Goo','Raincoat','Putrid_Pouch','Chemistry_Set','Labcoat'];
-            level = [5,4,4,3,4,2];
+            level = [5,4,4,4,4,2];
             ABlevelswitch(9);
 	}
-	if (autoBattle.items.Mood_Bracelet.owned) {
+	if (autoBattle.items.Mood_Bracelet.owned && !autoBattle.items.Lifegiving_Gem.owned) {
             contract = 'Lifegiving_Gem';
             items = ['Rusty_Dagger','Fists_of_Goo','Raincoat','Putrid_Pouch','Chemistry_Set','Labcoat'];
-            level = [5,4,4,3,4,2];
+            level = [5,4,4,4,4,2];
             ABlevelswitch(9);
 	}
-        if (autoBattle.items.Lifegiving_Gem.owned) {
+        if (autoBattle.items.Lifegiving_Gem.owned && !autoBattle.items.Hungering_Mold.owned) {
 	    contract = 'Hungering_Mold';
             items = ['Rusty_Dagger','Fists_of_Goo','Raincoat','Putrid_Pouch','Chemistry_Set','Labcoat'];
-            level = [5,4,4,3,4,2];
+            level = [5,4,4,4,4,2];
             ABlevelswitch(10);
 	}
         if (autoBattle.items.Hungering_Mold.owned && autoBattle.items.Putrid_Pouch.level < 4) {
             items = ['Rusty_Dagger','Fists_of_Goo','Raincoat','Putrid_Pouch','Chemistry_Set','Labcoat'];
-            level = [5,4,4,3,4,2];
+            level = [5,4,4,4,4,2];
             ABlevelswitch(10);
             if (autoBattle.items.Mood_Bracelet.level < 3) {
                 autoBattle.upgrade('Mood_Bracelet');
