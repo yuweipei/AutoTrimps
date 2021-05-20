@@ -416,7 +416,7 @@ function ABsolver() {
             ABlevelswitch(9);
 	}
         if (autoBattle.items.Lifegiving_Gem.owned) {
-	    contract = 'Hungering Mold';
+	    contract = 'Hungering_Mold';
             items = ['Rusty_Dagger','Fists_of_Goo','Raincoat','Putrid_Pouch','Chemistry_Set','Labcoat'];
             level = [5,4,4,3,4,2];
             ABlevelswitch(10);
