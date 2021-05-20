@@ -253,6 +253,9 @@ function ABsolver() {
 
         if (!autoBattle.items.Raincoat.owned) {
 	    contract = 'Raincoat';
+            items = ['Sword','Armor','Fists_of_Goo','Battery_Stick','Pants'];
+            level = [4,3,2,2,4];
+            ABlevelswitch(3);
 	}
 
 	if (autoBattle.items.Raincoat.owned) {
@@ -366,6 +369,75 @@ function ABsolver() {
 	}
 
         break;
+
+        case 9:
+
+        if (autoBattle.bonuses.Extra_Limbs.level < 2) {
+            ABlevelswitch(8);
+            items = ['Fists_of_Goo','Battery_Stick','Putrid_Pouch','Chemistry_Set','Labcoat'];
+            level = [4,5,3,4,2];
+            autoBattle.buyBonus('Extra_Limbs');
+        }
+        
+        if (autoBattle.bonuses.Extra_Limbs.level >= 2) {
+            ABlevelswitch(8);
+            items = ['Rusty_Dagger','Fists_of_Goo','Battery_Stick','Putrid_Pouch','Chemistry_Set','Labcoat'];
+            level = [5,4,4,3,4,2];
+        }
+
+	if (autoBattle.items.Rusty_Dagger.level >= 5) {
+	    ABlevelswitch(9);
+            items = ['Rusty_Dagger','Fists_of_Goo','Raincoat','Putrid_Pouch','Chemistry_Set','Labcoat'];
+            level = [5,4,4,3,4,2];
+	}
+
+	break;
+
+        case 10:
+
+        if (!autoBattle.items.Mood_Bracelet.owned) {
+	    contract = 'Mood_Bracelet';
+            items = ['Rusty_Dagger','Fists_of_Goo','Raincoat','Putrid_Pouch','Chemistry_Set','Labcoat'];
+            level = [5,4,4,3,4,2];
+            ABlevelswitch(9);
+	}
+	if (autoBattle.items.Mood_Bracelet.owned) {
+            contract = 'Lifegiving_Gem';
+            items = ['Rusty_Dagger','Fists_of_Goo','Raincoat','Putrid_Pouch','Chemistry_Set','Labcoat'];
+            level = [5,4,4,3,4,2];
+            ABlevelswitch(9);
+	}
+        if (autoBattle.items.Lifegiving_Gem.owned) {
+	    contract = 'Hungering Mold';
+            items = ['Rusty_Dagger','Fists_of_Goo','Raincoat','Putrid_Pouch','Chemistry_Set','Labcoat'];
+            level = [5,4,4,3,4,2];
+            ABlevelswitch(10);
+	}
+        if (autoBattle.items.Hungering_Mold.owned) {
+            items = ['Rusty_Dagger','Fists_of_Goo','Raincoat','Putrid_Pouch','Chemistry_Set','Labcoat'];
+            level = [5,4,4,3,4,2];
+            ABlevelswitch(10);
+            if (autoBattle.items.Mood_Bracelet.level < 3) {
+                autoBattle.upgrade('Mood_Bracelet');
+	    }
+            else if (autoBattle.items.Hungering_Mold.level < 2) {
+                autoBattle.upgrade('Hungering_Mold');
+	    }
+            else if (autoBattle.items.Putrid_Pouch.level < 4) {
+                autoBattle.upgrade('Putrid_Pouch');
+	    }
+	}
+	if (autoBattle.items.Putrid_Pouch.level >= 4) {
+	    contract: 'Bad_Medkit';
+            items = ['Fists_of_Goo','Putrid_Pouch','Chemistry_Set','Labcoat','Mood Bracelet','Hungering_Mold'];
+            level = [4,4,4,2,3,2];
+            ABlevelswitch(10);
+            if (autoBattle.items.Bad_Medkit.level < 3) {
+                autoBattle.upgrade('Bad_Medkit');
+	    }
+	}
+
+	break;
     }
 
     //Equip items
