@@ -421,21 +421,21 @@ function ABsolver() {
             level = [5,4,4,4,4,2];
             ABlevelswitch(10);
 	}
-        if (autoBattle.items.Hungering_Mold.owned && autoBattle.items.Putrid_Pouch.level < 4) {
+        if (autoBattle.items.Hungering_Mold.owned && autoBattle.items.Hungering_Mold.level < 2) {
             items = ['Rusty_Dagger','Fists_of_Goo','Raincoat','Putrid_Pouch','Chemistry_Set','Labcoat'];
             level = [5,4,4,4,4,2];
             ABlevelswitch(10);
-            if (autoBattle.items.Mood_Bracelet.level < 3) {
+	    if (autoBattle.items.Mood_Bracelet.level < 4) {
+                autoBattle.upgrade('Putrid_Pouch');
+	    }
+            else if (autoBattle.items.Mood_Bracelet.level < 3) {
                 autoBattle.upgrade('Mood_Bracelet');
 	    }
             else if (autoBattle.items.Hungering_Mold.level < 2) {
                 autoBattle.upgrade('Hungering_Mold');
 	    }
-            else if (autoBattle.items.Putrid_Pouch.level < 4) {
-                autoBattle.upgrade('Putrid_Pouch');
-	    }
 	}
-	if (autoBattle.items.Putrid_Pouch.level >= 4) {
+	if (autoBattle.items.Hungering_Mold.level >= 2) {
 	    contract: 'Bad_Medkit';
             items = ['Fists_of_Goo','Putrid_Pouch','Chemistry_Set','Labcoat','Mood Bracelet','Hungering_Mold'];
             level = [4,4,4,2,3,2];
