@@ -371,8 +371,16 @@ function ABsolver() {
         break;
 
         case 9:
+       
+        if (!autoBattle.items.Comfy_Boots.owned) {
+	    contract = 'Comfy_Boots';
+	}
 
-        if (autoBattle.bonuses.Extra_Limbs.level < 2) {
+        if (autoBattle.items.Comfy_Boots.level < 3) {
+            autoBattle.upgrade('Comfy_Boots');
+        }
+
+        if (autoBattle.items.Comfy_Boots.level >= 3 && autoBattle.bonuses.Extra_Limbs.level < 2) {
             ABlevelswitch(8);
             items = ['Fists_of_Goo','Battery_Stick','Putrid_Pouch','Chemistry_Set','Labcoat'];
             level = [4,5,3,4,2];
