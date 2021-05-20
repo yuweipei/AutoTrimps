@@ -379,7 +379,7 @@ function ABsolver() {
             autoBattle.buyBonus('Extra_Limbs');
         }
         
-        if (autoBattle.bonuses.Extra_Limbs.level >= 2) {
+        if (autoBattle.bonuses.Extra_Limbs.level >= 2 && autoBattle.items.Rusty_Dagger.level < 5) {
             ABlevelswitch(8);
             items = ['Rusty_Dagger','Fists_of_Goo','Battery_Stick','Putrid_Pouch','Chemistry_Set','Labcoat'];
             level = [5,4,4,3,4,2];
@@ -413,7 +413,7 @@ function ABsolver() {
             level = [5,4,4,3,4,2];
             ABlevelswitch(10);
 	}
-        if (autoBattle.items.Hungering_Mold.owned) {
+        if (autoBattle.items.Hungering_Mold.owned && autoBattle.items.Putrid_Pouch.level < 4) {
             items = ['Rusty_Dagger','Fists_of_Goo','Raincoat','Putrid_Pouch','Chemistry_Set','Labcoat'];
             level = [5,4,4,3,4,2];
             ABlevelswitch(10);
