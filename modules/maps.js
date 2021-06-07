@@ -1043,7 +1043,7 @@ function RautoMap() {
 	if (getPageSetting('Rtributefarm') == true) {
 		var tributefarmcell;
 		tributefarmcell = ((getPageSetting('Rtributefarmcell') > 0) ? getPageSetting('Rtributefarmcell') : 1);
-		Rtimefarm = (getPageSetting('Rtimefarm') == true && ((timefarmcell <= 1) || (timefarmcell > 1 && (game.global.lastClearedCell + 1) >= timefarmcell)) && game.global.world > 5 && (game.global.challengeActive != "Daily" && getPageSetting('Rtimefarmzone')[0] > 0 && getPageSetting('Rtimefarmtime')[0] > 0));
+		Rtimefarm = (getPageSetting('Rtributefarm') == true && ((tributefarmcell <= 1) || (tributefarmcell > 1 && (game.global.lastClearedCell + 1) >= tributefarmcell)) && game.global.world > 5 && (game.global.challengeActive != "Daily" && getPageSetting('Rtributefarmzone')[0] > 0 && getPageSetting('Rtributefarmtime')[0] > 0));
 		if (Rtimefarm) {
 			var tributefarmzone;
 			var tributefarmtribute;
