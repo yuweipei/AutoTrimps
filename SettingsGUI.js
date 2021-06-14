@@ -558,7 +558,7 @@ function initializeAllSettings() {
     createSetting('RMaxMapBonuslimit', 'Max MapBonus Limit', 'Limit the amount of Map Bonuses you get. Default is 10. ', 'value', '10', null, 'Maps');
     createSetting('RMaxMapBonushealth', 'Max MapBonus Health', 'Limit the amount of map bonuses you get when AutoMaps requires more health. Default is 10. ', 'value', '10', null, 'Maps');
     createSetting('Rhitssurvived', 'Hits Survived', 'Set this value to tell the script how many enemy attacks you wish to survive for. The default is 10. The lower this is the less health the script will get. If you set this too high it will farm too much so please be careful. ', 'value', '10', null, 'Maps');
-    createSetting('Rmapcuntoff', 'Map Cut Off', 'Decides when to get max map bonus. 4 is default. This means it will take 1 hit to kill an enemy if in D stance. ', 'value', '4', null, 'Maps');
+    createSetting('Rmapcuntoff', 'Map Cut Off', 'Decides when to get max map bonus. 1 is default. This means it will take 1 hit to kill an enemy. ', 'value', '1', null, 'Maps');
     createSetting('RDisableFarm', 'Farming H:D', 'If H:D goes above this value, it will farm for Damage & Health. The lower this setting, the more it will want to farm. Default is <b>16<b/>. <b>-1 to disable farming!</b>', 'value', -1, null, 'Maps');
 
     //Line 2
@@ -1718,8 +1718,8 @@ function updateCustomButtons() {
     radonon ? turnOn("Rtributefarm"): turnOff("Rtributefarm");
     (radonon && getPageSetting('Rtributefarm') == true) ? turnOn("Rtributefarmzone"): turnOff("Rtributefarmzone");
     (radonon && getPageSetting('Rtributefarm') == true) ? turnOn("Rtributefarmcell"): turnOff("Rtributefarmcell");
-    (radonon && getPageSetting('Rtributefarm') == true) ? turnOn("Rtributefarmtime"): turnOff("Rtributefarmtime");
-    (radonon && getPageSetting('Rtributefarm') == true) ? turnOn("Rtributemaplevel"): turnOff("Rtributemaplevel");
+    (radonon && getPageSetting('Rtributefarm') == true) ? turnOn("Rtributefarmamount"): turnOff("Rtributefarmamount");
+    (radonon && getPageSetting('Rtributefarm') == true) ? turnOn("Rtributefarmlevel"): turnOff("Rtributefarmlevel");
     (radonon && getPageSetting('Rtributefarm') == true) ? turnOn("Rtributemapselection"): turnOff("Rtributemapselection");
     (radonon && getPageSetting('Rtributefarm') == true) ? turnOn("Rtributespecialselection"): turnOff("Rtributespecialselection");
     (radonon && getPageSetting('Rtributefarm') == true) ? turnOn("Rtributegatherselection"): turnOff("Rtributegatherselection");
