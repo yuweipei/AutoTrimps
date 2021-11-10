@@ -203,13 +203,13 @@ function buyBuildings() {
     }
     //Nurseries
     var warpstationCost = getBuildingItemPrice('Warpstation', "gem", false, 1);
-    console.log("warp cost", warpstationCost);
+    debug("warp cost", warpstationCost);
     var nurseryCost = getBuildingItemPrice('Nursery', "gem", false, 1);
-    console.log("nursery cost", warpstationCost);
+    debug("nursery cost", warpstationCost);
     var personalBuyDecisionOverride = nurseryCost <= warpstationCost * 0.01;
-    console.log("should buy: ", personalBuyDecisionOverride);
+    debug("should buy: ", personalBuyDecisionOverride);
     if (game.buildings.Nursery.locked == 0 && (!hidebuild &&( personalBuyDecisionOverride || game.global.world >= getPageSetting('NoNurseriesUntil') || getPageSetting('NoNurseriesUntil') < 1) && (getPageSetting('MaxNursery') > game.buildings.Nursery.owned || getPageSetting('MaxNursery') == -1)) || (game.global.challengeActive != "Daily" && getPageSetting('PreSpireNurseries') > game.buildings.Nursery.owned && isActiveSpireAT()) || (game.global.challengeActive == "Daily" && getPageSetting('dPreSpireNurseries') > game.buildings.Nursery.owned && disActiveSpireAT())) {
-	safeBuyBuilding('Nursery');
+	    safeBuyBuilding('Nursery');
     }
 
     postBuy2(oldBuy);
