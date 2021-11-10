@@ -202,9 +202,9 @@ function buyBuildings() {
         safeBuyBuilding('Tribute');
     }
     //Nurseries
-    var warpstationCost = getBuildingItemPrice('Warpstation', "gem", false, 1);
+    var warpstationCost = getBuildingItemPrice('Warpstation', "gems", false, 1);
     debug("warp cost", warpstationCost);
-    var nurseryCost = getBuildingItemPrice('Nursery', "gem", false, 1);
+    var nurseryCost = getBuildingItemPrice('Nursery', "gems", false, 1);
     debug("nursery cost", warpstationCost);
     var personalBuyDecisionOverride = nurseryCost <= warpstationCost * 0.01;
     debug("should buy: ", personalBuyDecisionOverride);
