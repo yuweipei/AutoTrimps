@@ -202,9 +202,9 @@ function buyBuildings() {
         safeBuyBuilding('Tribute');
     }
     //Nurseries
-    var tributeCost = getBuildingItemPrice('Tribute', "food", false, 1);
+    var warpstationCost = getBuildingItemPrice('Warpstation', "food", false, 1);
     var nurseyCost = getBuildingItemPrice('Nursery', "food", false, 1);
-    var personalCostOverride = nurseyCost <= tributeCost * 0.01;
+    var personalCostOverride = nurseyCost <= warpstationCost * 0.01;
     if (game.buildings.Nursery.locked == 0 && (!hidebuild &&( personalCostOverride || game.global.world >= getPageSetting('NoNurseriesUntil') || getPageSetting('NoNurseriesUntil') < 1) && (getPageSetting('MaxNursery') > game.buildings.Nursery.owned || getPageSetting('MaxNursery') == -1)) || (game.global.challengeActive != "Daily" && getPageSetting('PreSpireNurseries') > game.buildings.Nursery.owned && isActiveSpireAT()) || (game.global.challengeActive == "Daily" && getPageSetting('dPreSpireNurseries') > game.buildings.Nursery.owned && disActiveSpireAT())) {
 	safeBuyBuilding('Nursery');
     }
